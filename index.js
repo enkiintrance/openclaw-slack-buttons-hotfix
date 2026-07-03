@@ -5,7 +5,7 @@
 import { defineBundledChannelEntry } from "openclaw/plugin-sdk/channel-entry-contract";
 
 export default defineBundledChannelEntry({
-  id: "slack",
+  id: "slack-buttons-hotfix",
   name: "Slack (presentation-buttons hotfix)",
   description:
     "Official Slack channel + bridge for openclaw/openclaw#95440 (presentation buttons render as Block Kit instead of bullet text).",

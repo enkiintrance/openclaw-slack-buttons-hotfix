@@ -1,6 +1,6 @@
 {
   "name": "openclaw-slack-buttons-hotfix",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Hotfix channel plugin: makes OpenClaw presentation buttons render as real Slack Block Kit instead of a bullet-text list (upstream bug openclaw/openclaw#95440). Wraps the official @openclaw/slack plugin and bridges the missing renderPresentation/presentationCapabilities on the registered outbound adapter. Becomes a transparent pass-through once upstream ships the fix.",
   "type": "module",
   "license": "MIT",
@@ -40,7 +40,9 @@
     "compat": {
       "pluginApi": ">=2026.6.11",
       "minGatewayVersion": "2026.6.11",
-      "tested": ["2026.6.11"]
+      "tested": [
+        "2026.6.11"
+      ]
     },
     "build": {
       "openclawVersion": "2026.6.11"
@@ -53,6 +55,7 @@
     "secrets.js",
     "openclaw.plugin.json",
     "README.md",
-    "LICENSE"
+    "LICENSE",
+    "resolve-slack.js"
   ]
 }

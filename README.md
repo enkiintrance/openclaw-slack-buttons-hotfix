@@ -43,28 +43,38 @@ plugin through completely unchanged. Once the fix is released you can simply uni
 ## Install
 
 ```bash
-openclaw plugins install npm:openclaw-slack-buttons-hotfix
+openclaw plugins install clawhub:openclaw-slack-buttons-hotfix   # or npm:openclaw-slack-buttons-hotfix
 openclaw plugins enable slack-buttons-hotfix
+openclaw plugins disable slack     # the wrapper serves the "slack" channel instead
 openclaw gateway restart
 ```
 
+**Why disable the stock plugin:** with both enabled, core keeps routing the channel to the
+stock plugin — `preferOver` in this plugin's manifest only prevents core from
+auto-re-enabling the stock plugin later (e.g. because `channels.slack` is configured).
+The official `@openclaw/slack` package itself must stay **installed** (this plugin loads
+its code); only the plugin entry is disabled.
+
 Your existing `channels.slack` config (tokens, allowlists, capabilities) is used as-is —
-this plugin serves the same channel id.
+this plugin serves the same channel id. If your config uses a `plugins.allow` allowlist,
+add `"slack-buttons-hotfix"` (the installer usually does this for you).
 
 ## Verify
 
 ```bash
-openclaw message send --channel slack --target <your-dm> \
+openclaw message send --channel slack --target <your-dm> --json \
   --message "button test" \
   --presentation '{"blocks":[{"type":"buttons","buttons":[{"label":"Tap me","value":"ok","style":"success"}]}]}'
 ```
 
-You should see a real tappable button. Taps arrive back as inbound text equal to the
-button `value` (same behavior as Telegram inline buttons).
+You should see a real tappable button, and the JSON receipt should report
+`parts[0].kind: "card"` (broken installs report `"text"`). Taps arrive back as inbound
+text equal to the button `value` (same behavior as Telegram inline buttons).
 
 ## Uninstall (after upstream fixes #95440)
 
 ```bash
+openclaw plugins enable slack
 openclaw plugins disable slack-buttons-hotfix
 openclaw plugins uninstall slack-buttons-hotfix
 openclaw gateway restart

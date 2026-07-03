@@ -1,2 +1,3 @@
-// Re-export the official secret contract (token discovery etc.) unchanged.
-export { channelSecrets } from "@openclaw/slack/dist/secret-contract-api.js";
+// Re-export the official secret contract via the sync locator.
+import { loadSlackDistSync } from "./resolve-slack.js";
+export const channelSecrets = loadSlackDistSync("secret-contract-api.js").channelSecrets;

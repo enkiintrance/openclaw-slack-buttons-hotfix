@@ -10,8 +10,10 @@
 // This module re-exports the official plugin object with those two properties bridged in.
 // If the installed @openclaw/slack already exposes renderPresentation (i.e. upstream fixed
 // it — candidate PR openclaw/openclaw#95463), the plugin passes through UNCHANGED.
-import { slackPlugin } from "@openclaw/slack/dist/channel-plugin-api.js";
-import { buildSlackPresentationBlocks, parseSlackBlocksInput } from "@openclaw/slack/dist/api.js";
+import { loadSlackDistSync } from "./resolve-slack.js";
+
+const { slackPlugin } = loadSlackDistSync("channel-plugin-api.js");
+const { buildSlackPresentationBlocks, parseSlackBlocksInput } = loadSlackDistSync("api.js");
 
 function bridgeOutbound(outbound) {
   if (!outbound || typeof outbound.renderPresentation === "function") {
