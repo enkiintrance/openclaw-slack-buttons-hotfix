@@ -1,0 +1,17 @@
+{
+  "id": "slack-buttons-hotfix",
+  "name": "Slack (presentation-buttons hotfix)",
+  "description": "Official Slack channel wrapped with the openclaw/openclaw#95440 fix: bridges renderPresentation + presentationCapabilities onto the registered outbound adapter so presentation buttons render as Block Kit instead of bullet text. Transparent pass-through once upstream fixes the facade.",
+  "kind": "channel",
+  "channels": ["slack"],
+  "channelConfigs": {
+    "slack": {
+      "preferOver": ["slack"]
+    }
+  },
+  "configSchema": {
+    "type": "object",
+    "additionalProperties": false,
+    "properties": {}
+  }
+}
